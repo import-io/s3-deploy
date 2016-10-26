@@ -120,6 +120,12 @@ export const deploy = co.wrap(function *(files, options, AWSOptions, s3Options, 
   const cwd = options.cwd;
   const filePrefix = options.filePrefix || '';
 
+
+  if(options.profile) {
+    var credentials = new AWS.SharedIniFileCredentials({profile: options.profile});
+    AWS.config.credentials = credentials; 
+  }
+
   AWS.config.update(Object.assign({
     sslEnabled: true
   }, AWSOptions));

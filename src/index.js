@@ -15,6 +15,7 @@ co(function *() {
     bucket: argv.bucket,
     region: argv.r || argv.region || 'us-east-1',
     cwd: argv.cwd || '',
+	  profile: argv.profile,    
     gzip: (argv.gzip ? 'gzip' : undefined),
   };
 
