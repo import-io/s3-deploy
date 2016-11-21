@@ -37,6 +37,11 @@ You can also specify the `signatureVersion` that should be used by S3 client. Cu
 ```
 Use this parameter to specify a file prefix for all your destination files. For example, if you wanted to deploy a versioned history of your project to S3 whenever publishing to npm, you could use `--filePrefix $npm_package_version` in a script in your project's package.json file.
 
+```
+--profile
+```
+You can specify a specific AWS profile to use to connect to S3 (defaults to `default`). More information on how to setup AWS profiles is available in the [AWS docs](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html).
+
 ## AWS Credentials
 AWS credentials can be provided via environment variables, or in the `~/.aws/credentials` file.  More details here:
 http://docs.aws.amazon.com/cli/latest/topic/config-vars.html. Please make sure to define a default in your AWS credentials, this will help prevent a `Missing Credentials` error during deployment.
