@@ -35,6 +35,10 @@ co(function *() {
     options.private = true;
   }
 
+  if(argv.hasOwnProperty('ext')) {
+    options.ext = argv.ext;
+  }
+
   if(argv.hasOwnProperty('signatureVersion')) {
     options.signatureVersion = argv.signatureVersion;
   }
@@ -51,6 +55,8 @@ co(function *() {
   console.log('> Gzip:', options.gzip);
   console.log('> Cache-Control max-age=:', options.cache);
   console.log('> E-Tag:', options.etag);
+  console.log('> Private:', options.private ? true : false);
+  if (options.ext) console.log('> Ext:', options.ext);
 
   const AWSOptions = {
     region: options.region

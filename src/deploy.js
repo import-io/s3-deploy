@@ -17,13 +17,13 @@ import * as MSG from './MSG';
  * @param  {Object} opts   Object with additional AWS parameters.
  * @return {Promise}        Returns a promise which resolves with a log message of upload status.
  */
-export function upload(client, file, opts, filePrefix) {
+export function upload(client, file, opts, filePrefix, ext) {
   return new Promise((resolve, reject) => {
     opts = Object.assign({
       ACL: 'public-read'
     }, opts);
 
-    var params = Object.assign({}, utils.buildUploadParams(file, filePrefix), opts);
+    var params = Object.assign({}, utils.buildUploadParams(file, filePrefix, ext), opts);
     params = utils.handleETag(params);
     var dest = params.Key;
 
@@ -93,7 +93,7 @@ export const readFile = co.wrap(function *(filepath, cwd, gzipFiles) {
  * checking if file is already in AWS bucket and needs updates,
  * and uploading files that are not there yet, or do need an update.
  */
-export const handleFile = co.wrap(function *(filePath, cwd, filePrefix, client, s3Options) {
+export const handleFile = co.wrap(function *(filePath, cwd, filePrefix, client, s3Options, ext) {
   const fileObject = yield readFile(filePath, cwd, s3Options.ContentEncoding !== undefined);
 
   if(fileObject !== undefined) {
@@ -104,7 +104,7 @@ export const handleFile = co.wrap(function *(filePath, cwd, filePrefix, client, 
       return;
     }
 
-    const fileUploadStatus = yield upload(client, fileObject, s3Options, filePrefix);
+    const fileUploadStatus = yield upload(client, fileObject, s3Options, filePrefix, ext);
     console.log(fileUploadStatus);
   }
 });
@@ -132,6 +132,6 @@ export const deploy = co.wrap(function *(files, options, AWSOptions, s3Options, 
   var client = new AWS.S3(clientOptions);
 
   yield Promise.all(files.map(function(filePath) {
-    return handleFile(filePath, cwd, filePrefix, client, s3Options);
+    return handleFile(filePath, cwd, filePrefix, client, s3Options, options.ext);
   }));
 });
