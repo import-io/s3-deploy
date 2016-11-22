@@ -31,6 +31,10 @@ co(function *() {
     options.etag = argv.etag;
   }
 
+  if(argv.hasOwnProperty('private')) {
+    options.private = true;
+  }
+
   if(argv.hasOwnProperty('signatureVersion')) {
     options.signatureVersion = argv.signatureVersion;
   }
@@ -62,6 +66,10 @@ co(function *() {
     s3Options.Metadata = {
       ETag: options.etag,
     };
+  }
+
+  if(options.private) {
+    s3Options.ACL = 'private';
   }
 
   const s3ClientOptions = {};

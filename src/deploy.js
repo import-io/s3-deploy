@@ -123,7 +123,7 @@ export const deploy = co.wrap(function *(files, options, AWSOptions, s3Options, 
 
   if(options.profile) {
     var credentials = new AWS.SharedIniFileCredentials({profile: options.profile});
-    AWS.config.credentials = credentials; 
+    AWS.config.credentials = credentials;
   }
 
   AWS.config.update(Object.assign({
