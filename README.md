@@ -90,6 +90,12 @@ Invokes eslint validation based on rules defined in the `.eslintrc` file.
 
 ## Changelog
 
+### 0.7.2
+
+**Bug Fix**
+
+- Reverting changes to readFile function from PR https://github.com/import-io/s3-deploy/pull/11 as unfortunately it caused other issues: https://github.com/import-io/s3-deploy/issues/14
+
 ### 0.7.1
 
 **API Additions**

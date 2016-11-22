@@ -1,6 +1,5 @@
 import util from 'util';
 import path from 'path';
-import url from 'url';
 import zlib from 'zlib';
 
 import AWS from 'aws-sdk';
@@ -81,8 +80,8 @@ export const readFile = co.wrap(function *(filepath, cwd, gzipFiles) {
     return {
       stat: stat,
       contents: fileContents,
-      base: url.resolve(process.cwd(), cwd),
-      path: url.resolve(process.cwd(), filepath)
+      base: path.join(process.cwd(), cwd),
+      path: path.join(process.cwd(), filepath)
     };
   }
 
