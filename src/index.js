@@ -27,6 +27,10 @@ co(function *() {
     options.cache = argv.cache;
   }
 
+  if(argv.hasOwnProperty('immutable')) {
+    options.immutable = true;
+  }
+
   if(argv.hasOwnProperty('etag')) {
     options.etag = argv.etag;
   }
@@ -49,11 +53,16 @@ co(function *() {
     return glob.sync(pattern);
   }));
 
+  let cacheControl = []
+  if (options.cache) cacheControl.push('max-age=' + options.cache)
+  if (options.immutable) cacheControl.push('immutable')
+  cacheControl = cacheControl.length ? cacheControl.join(', ') : undefined
+
   console.log('Deploying files: %s', globbedFiles);
   console.log('> Target S3 bucket: %s (%s region)', options.bucket, options.region);
   console.log('> Target file prefix: %s', options.filePrefix);
   console.log('> Gzip:', options.gzip);
-  console.log('> Cache-Control max-age=:', options.cache);
+  console.log('> Cache-Control:', cacheControl);
   console.log('> E-Tag:', options.etag);
   console.log('> Private:', options.private ? true : false);
   if (options.ext) console.log('> Ext:', options.ext);
@@ -65,12 +74,12 @@ co(function *() {
   const s3Options = {
     Bucket: options.bucket,
     ContentEncoding: options.gzip,
-    CacheControl: options.cache ? 'max-age=' + options.cache : undefined,
+    CacheControl: cacheControl
   };
 
   if(options.hasOwnProperty('etag')) {
     s3Options.Metadata = {
-      ETag: options.etag,
+      ETag: options.etag
     };
   }
 
