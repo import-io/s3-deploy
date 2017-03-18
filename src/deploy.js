@@ -104,6 +104,9 @@ export const handleFile = co.wrap(function *(filePath, cwd, filePrefix, client, 
       return;
     }
 
+    fileObject.base = fileObject.base.split('\\').join('/');
+    fileObject.path = fileObject.path.split('\\').join('/');
+
     const fileUploadStatus = yield upload(client, fileObject, s3Options, filePrefix, ext);
     console.log(fileUploadStatus);
   }

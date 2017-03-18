@@ -53,10 +53,10 @@ co(function *() {
     return glob.sync(pattern);
   }));
 
-  let cacheControl = []
-  if (options.cache) cacheControl.push('max-age=' + options.cache)
-  if (options.immutable) cacheControl.push('immutable')
-  cacheControl = cacheControl.length ? cacheControl.join(', ') : undefined
+  let cacheControl = [];
+  if (options.cache) cacheControl.push('max-age=' + options.cache);
+  if (options.immutable) cacheControl.push('immutable');
+  cacheControl = cacheControl.length ? cacheControl.join(', ') : undefined;
 
   console.log('Deploying files: %s', globbedFiles);
   console.log('> Target S3 bucket: %s (%s region)', options.bucket, options.region);
