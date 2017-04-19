@@ -98,6 +98,7 @@ co(function *() {
 })
 .then(() => {
   console.log('All files uploaded.');
+  process.exit(0); // eslint-disable-line
 })
 .catch(err => {
   if (err.stack) {
