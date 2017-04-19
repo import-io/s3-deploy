@@ -1,6 +1,9 @@
 s3-deploy
 =======
 
+[![Dependency Status](https://david-dm.org/import-io/s3-deploy/status.svg)](https://david-dm.org/import-io/s3-deploy) 
+[![devDependency Status](https://david-dm.org/import-io/s3-deploy/dev-status.svg)](https://david-dm.org/import-io/s3-deploy?type=dev)
+
 NodeJS bash utility for deploying files to Amazon S3
 
 ## Usage
