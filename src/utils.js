@@ -7,8 +7,8 @@ import mime from 'mime';
  * @param  {String} src Path to file fow which content type should be evaluated.
  * @return {String}     Returns string with content type and charset.
  */
-export function contentType(src) {
-  var type = mime.lookup(src).replace('-', '');
+export function contentType(src, ext) {
+  var type = mime.lookup(ext || src).replace('-', '');
   var charset = mime.charsets.lookup(type, null);
 
   if (charset) {
@@ -59,11 +59,11 @@ export function buildBaseParams(file, filePrefix) {
  * @param  {Object} file File object, with all it's details.
  * @return {Object}      AWS S3 upload function parameters.
  */
-export function buildUploadParams(file, filePrefix) {
+export function buildUploadParams(file, filePrefix, ext) {
   var params = Object.assign({
     ContentMD5: base64Md5(file.contents),
     Body: file.contents,
-    ContentType: contentType(file.path)
+    ContentType: contentType(file.path, ext)
   }, buildBaseParams(file, filePrefix));
 
   return params;

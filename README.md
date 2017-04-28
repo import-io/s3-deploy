@@ -23,6 +23,11 @@ Specifying `--gzip` will gzip all files before sending them.
 Use this parameter to specify the `Cache-Control: max-age=X` header, where X is the number of seconds a given item will be kept in the cache for. By default this value is undefined.
 
 ```
+--immutable
+```
+When a page is refreshed, which is an extremely common social media scenario, elements that were previously marked immutable with an HTTP response header do not have to be revalidated with the server. It sets the `Cache-Control: immutable` header - [using-immutable-caching-to-speed-up-the-web](https://hacks.mozilla.org/2017/01/using-immutable-caching-to-speed-up-the-web/)
+
+```
 --etag X
 ```
 You can also specify the `ETag: X` header, where X is either user-defined value for this header, or MD5 of the content. To automatically fill this header with MD5 hash of the file, just use `--etag` parameter without any value. Internally the tool will generate MD5 hash of the content and will set it as the ETag header value. By default this parameter is undefined.
@@ -37,9 +42,24 @@ You can also specify the `signatureVersion` that should be used by S3 client. Cu
 ```
 Use this parameter to specify a file prefix for all your destination files. For example, if you wanted to deploy a versioned history of your project to S3 whenever publishing to npm, you could use `--filePrefix $npm_package_version` in a script in your project's package.json file.
 
+```
+--profile
+```
+You can specify a specific AWS profile to use to connect to S3 (defaults to `default`). More information on how to setup AWS profiles is available in the [AWS docs](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html).
+
+```
+--private
+```
+Use this parameter to specify that objects being uploaded will be stored with private ACL (Owner gets FULL_CONTROL. No one else has access rights). By default, 'public-read' ACL is set. More information on the canned-acl is available in the [AWS docs](http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl)
+
+```
+--ext
+```
+Enables to set the correct content type header when files has no extension. For example, when the s3 bucket is used for webhosting and there is need to access paths like `/about` instead of `/about.html` so its possible to upload file named `about` and set `--ext html`
+
 ## AWS Credentials
 AWS credentials can be provided via environment variables, or in the `~/.aws/credentials` file.  More details here:
-http://docs.aws.amazon.com/cli/latest/topic/config-vars.html
+http://docs.aws.amazon.com/cli/latest/topic/config-vars.html. Please make sure to define a default in your AWS credentials, this will help prevent a `Missing Credentials` error during deployment.
 
 ## Commands
 
@@ -80,10 +100,34 @@ Invokes eslint validation based on rules defined in the `.eslintrc` file.
 
 ## Changelog
 
+### 0.7.3
+
+**API Additions**
+
+- Adding the ability to set the extension if the files without one or there is need to override it
+
+### 0.7.2
+
+**Bug Fix**
+
+- Reverting changes to readFile function from PR https://github.com/import-io/s3-deploy/pull/11 as unfortunately it caused other issues: https://github.com/import-io/s3-deploy/issues/14
+
+### 0.7.1
+
+**API Additions**
+
+- Adding the ability to set private ACL for object
+
+### 0.6.1
+
+**Bug fix**
+
+- Fixing incorrect folder structure when `s3-deploy` is used from windows machine.
+
 ### 0.6.0
 
 ***API Additions**
-- Adding the ability to specify `filePrefix` 
+- Adding the ability to specify `filePrefix`
 
 ### 0.5.2
 
