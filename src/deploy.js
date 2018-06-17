@@ -132,7 +132,7 @@ export const readFile = co.wrap(function *(filepath, cwd, gzipFiles) {
   if (stat.isFile()) {
     let fileContents = yield fs.readFile(filepath, {encoding: null});
 
-    if (gzipFiles) {
+    if (gzipFiles && !filepath.endsWith('.mp4')) {
       fileContents = zlib.gzipSync(fileContents);
     }
 
