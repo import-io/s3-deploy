@@ -13,6 +13,12 @@ Deploys files found by the `./dist/**` glob patten to S3. Change `AWS_REGION` wi
 ### Optional parameters
 
 ```
+--config filepath
+```
+
+This will use the options found in the specified config file as an alternative to CLI arguments. If additional CLI arguments are specified, they will overwrite values found in the config file.
+
+```
 --gzip [ETX,...]
 ```
 

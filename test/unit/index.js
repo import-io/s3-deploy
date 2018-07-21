@@ -13,4 +13,12 @@ describe('#parseCliArgsToOptions()', () => {
       expect(parseCliArgsToOptions([0, 0, '--gzip', 'js,css,html']).gzip).to.deep.equal(['js', 'css', 'html']);
     });
   });
+  describe('--config', async() => {
+    it('should include options from a config file', () => {
+      expect(parseCliArgsToOptions([0, 0, '--config', './test/data/config.json']).gzip).to.deep.equal(['js', 'css']);
+    });
+    it('should override options from a config file with arguments', () => {
+      expect(parseCliArgsToOptions([0, 0, '--config', './test/data/config.json', '--gzip', 'html']).gzip).to.deep.equal(['html']);
+    });
+  });
 });

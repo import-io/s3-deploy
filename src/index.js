@@ -3,6 +3,7 @@ import glob from 'glob';
 import flatten from 'lodash/array/flatten';
 import minimist from 'minimist';
 import co from 'co';
+import path from 'path';
 
 import { deploy } from './deploy';
 
@@ -18,6 +19,10 @@ export function parseCliArgsToOptions(processArgv = process.argv) {
     profile: argv.profile,
     index: argv.index || null,
   };
+
+  if(argv.hasOwnProperty('config')) {
+    Object.assign(options, require(path.resolve(argv.config)));
+  }
 
   if(argv.hasOwnProperty('gzip')) {
     options.gzip = typeof argv.gzip === 'string' ? argv.gzip.split(',') : argv.gzip;

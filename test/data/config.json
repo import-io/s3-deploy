@@ -1,0 +1,4 @@
+{
+  "bucket" : "example-bucket",
+  "gzip": ["js", "css"]
+}
