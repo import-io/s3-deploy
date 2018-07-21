@@ -152,6 +152,13 @@ Invokes eslint validation based on rules defined in the `.eslintrc` file.
 
 ## Changelog
 
+### 1.2.0
+
+**API Additions**
+
+* Pass a config file to `--config` as an alternative to specifying arguments on the CLI. 
+* If both `--config` and additional CLI arguments are specified, CLI arguments will override config file values.
+
 ### 1.1.0
 
 **API Additions**
