@@ -13,6 +13,12 @@ Deploys files found by the `./dist/**` glob patten to S3. Change `AWS_REGION` wi
 ### Optional parameters
 
 ```
+--config filepath
+```
+
+This will use the options found in the specified config file as an alternative to CLI arguments. If additional CLI arguments are specified, they will overwrite values found in the config file.
+
+```
 --gzip [ETX,...]
 ```
 
@@ -145,6 +151,13 @@ Invokes eslint validation based on rules defined in the `.eslintrc` file.
 * After changes are merged into master branch, checkout master branch, run tests one more time, and publish this package to npm repository.
 
 ## Changelog
+
+### 1.2.0
+
+**API Additions**
+
+* Pass a config file to `--config` as an alternative to specifying arguments on the CLI. 
+* If both `--config` and additional CLI arguments are specified, CLI arguments will override config file values.
 
 ### 1.1.0
 

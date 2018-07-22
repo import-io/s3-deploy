@@ -1,6 +1,6 @@
 {
   "name": "s3-deploy",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "NodeJS bash utility for deploying files to Amazon S3",
   "scripts": {
     "test": "mocha",
