@@ -12,17 +12,19 @@ export function parseCliArgsToOptions(processArgv = process.argv) {
   const argv = minimist(processArgv.slice(2));
 
   // Create options object, based on command line arguments.
-  const options = {
+  const options = {};
+
+  if(argv.hasOwnProperty('config')) {
+    Object.assign(options, require(path.resolve(argv.config)));
+  }
+
+  Object.assign(options, {
     bucket: argv.bucket,
     region: argv.r || argv.region || 'us-east-1',
     cwd: argv.cwd || '',
     profile: argv.profile,
     index: argv.index || null,
-  };
-
-  if(argv.hasOwnProperty('config')) {
-    Object.assign(options, require(path.resolve(argv.config)));
-  }
+  });
 
   if(argv.hasOwnProperty('gzip')) {
     options.gzip = typeof argv.gzip === 'string' ? argv.gzip.split(',') : argv.gzip;

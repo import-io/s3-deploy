@@ -18,7 +18,7 @@ describe('#parseCliArgsToOptions()', () => {
       expect(parseCliArgsToOptions([0, 0, '--config', './test/data/config.json']).gzip).to.deep.equal(['js', 'css']);
     });
     it('should override options from a config file with arguments', () => {
-      expect(parseCliArgsToOptions([0, 0, '--config', './test/data/config.json', '--gzip', 'html']).gzip).to.deep.equal(['html']);
+      expect(parseCliArgsToOptions([0, 0, '--config', './test/data/config.json', '--bucket', 'overridebucket']).bucket).to.equal('overridebucket');
     });
   });
 });
