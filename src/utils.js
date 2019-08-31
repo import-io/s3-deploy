@@ -11,7 +11,7 @@ export { AWS as AWS };
  * @return {String}     Returns string with content type and charset.
  */
 export function contentType(src, ext) {
-  var type = mime.lookup(ext || src).replace('-', '');
+  var type = mime.lookup(ext || src);
   var charset = mime.charsets.lookup(type, null);
 
   if (charset) {
