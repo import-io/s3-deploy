@@ -6,6 +6,7 @@ import globrex from 'globrex';
 import AWS from 'aws-sdk';
 import fs from 'co-fs-extra';
 import co from 'co';
+import proxyAgent from 'proxy-agent';
 
 import  { invalidate } from './cloudfront';
 import * as utils from './utils';
@@ -231,6 +232,9 @@ export const deploy = co.wrap(function *(options) {
   const AWSOptions = {
     region: options.region
   };
+  if (options.proxy) {
+    AWSOptions.httpOptions = { agent: proxyAgent(options.proxy) };
+  }
   AWS.config.update(Object.assign({
     sslEnabled: true
   }, AWSOptions));

@@ -121,6 +121,13 @@ CloudFront Distribution ID. Use along with `--invalidate` to invalides files wit
 Paths to invalidate within CloudFront distribution. Value must be wrapped with quotes and each file separated by whitespace character. `--distId` argument is mandatory. Defaults to `['/']`. More details here:
 https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html.
 
+```
+--proxy
+```
+
+The address of an optional HTTP proxy to be used for all server communication.
+If not set, no HTTP proxy will be used. The parameter has to be provided in a URI format, e.g. `--proxy http://my-proxy.com:80`.
+
 ## AWS Credentials
 
 AWS credentials can be provided via environment variables, or in the `~/.aws/credentials` file. More details here:
