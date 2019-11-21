@@ -76,6 +76,10 @@ export function parseCliArgsToOptions(processArgv = process.argv) {
     options.invalidate = argv.invalidate;
   }
 
+  if(argv.hasOwnProperty('proxy')) {
+    options.proxy = argv.proxy;
+  }
+
   // Get paths of all files from the glob pattern(s) that were passed as the
   // unnamed command line arguments.
   options.globbedFiles = _.flatten(argv._.filter(Boolean).map(function(pattern) {
