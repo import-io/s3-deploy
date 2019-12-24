@@ -33,7 +33,7 @@
     "minimist": "^1.1.1"
   },
   "devDependencies": {
-    "aws-sdk-mock": "^4.3.0",
+    "aws-sdk-mock": "^5.0.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
