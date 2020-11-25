@@ -100,7 +100,7 @@ Enables to set the correct content type header when files has no extension. For 
 ```
 
 Removes files in S3, that are not available in the local copy of the directory. Useful to cleanup files that should no longer reside in the remote version.
-Now it also has the abilityto specify glob pattern that defines filter for files that should be considered to be deleted.
+Now it also has the ability to specify glob pattern that defines filter for files that should be considered to be deleted.
 
 ```
 --index
