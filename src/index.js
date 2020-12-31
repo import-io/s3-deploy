@@ -51,6 +51,10 @@ export function parseCliArgsToOptions(processArgv = process.argv) {
     options.etag = argv.etag;
   }
 
+  if(argv.hasOwnProperty('sse')) {
+    options.sse = argv.sse;
+  }
+
   if(argv.hasOwnProperty('private')) {
     options.private = true;
   }

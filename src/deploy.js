@@ -256,6 +256,9 @@ export const deploy = co.wrap(function *(options) {
   if (options.private) {
     s3UploadOptions.ACL = 'private';
   }
+  if (options.sse) {
+    s3UploadOptions.ServerSideEncryption = options.sse;
+  }
 
   yield Promise.all(options.globbedFiles.map(function (filePath) {
     return handleFile(filePath, s3Client, s3UploadOptions, options);

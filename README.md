@@ -90,6 +90,13 @@ You can specify a specific AWS profile to use to connect to S3 (defaults to `def
 Use this parameter to specify that objects being uploaded will be stored with private ACL (Owner gets FULL_CONTROL. No one else has access rights). By default, 'public-read' ACL is set. More information on the canned-acl is available in the [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl)
 
 ```
+--sse [AES256|aws:kms]
+```
+
+Use this parameter to specify Server-Side Encryption options for s3 objects. By default, no SSE is enabled. Optional values `AES256` | `aws:kms`. More information on how to setup AWS profiles is available in the [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html).
+
+
+```
 --ext
 ```
 
